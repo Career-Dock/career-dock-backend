@@ -1,12 +1,16 @@
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
-import config from '../../config';
 import { TUser, UserModel } from './user.interface';
 const userSchema = new Schema<TUser, UserModel>(
   {
-    username: {
+    clerkUserId: {
       type: String,
-      required: [true, 'Username is required!'],
+      required: [true, 'Clerk userId is required!'],
+      unique: true,
+    },
+    name: {
+      type: String,
+      required: [true, 'Name is required!'],
       unique: true,
     },
     email: {
@@ -16,23 +20,17 @@ const userSchema = new Schema<TUser, UserModel>(
     },
     password: {
       type: String,
-      required: [true, 'Password is required!'],
+    },
+    profileImage: {
+      type: String,
+    },
+    phoneNumber: {
+      type: String,
     },
     role: {
       type: String,
-      enum: ['user', 'author'],
+      enum: ['user', 'admin'],
       default: 'user',
-    },
-    firstName: {
-      type: String,
-      required: [true, 'First name is required!'],
-    },
-    lastName: {
-      type: String,
-      required: [true, 'Last name is required!'],
-    },
-    profilePicture: {
-      type: String,
     },
     isDeleted: {
       type: Boolean,
@@ -48,21 +46,21 @@ const userSchema = new Schema<TUser, UserModel>(
   },
 );
 
-userSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  // hashing password and save into DB
-  this.password = await bcrypt.hash(
-    this.password,
-    Number(config.bcrypt_salt_rounds),
-  );
-  next();
-});
+// userSchema.pre('save', async function (next) {
+//   // eslint-disable-next-line @typescript-eslint/no-this-alias
+//   // hashing password and save into DB
+//   this.password = await bcrypt.hash(
+//     this.password,
+//     Number(config.bcrypt_salt_rounds),
+//   );
+//   next();
+// });
 
 // set '' after saving password
-userSchema.post('save', function (doc, next) {
-  doc.password = '';
-  next();
-});
+// userSchema.post('save', function (doc, next) {
+//   doc.password = '';
+//   next();
+// });
 userSchema.statics.isUserExists = async function (field: Record<string, unknown>) {
   return await User.findOne(field).select('+password');
 };

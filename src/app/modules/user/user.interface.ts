@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { USER_ROLE } from "./user.constant";
 
 export type TUser = {
-  username: string;
+  _id: string | Types.ObjectId;
+  clerkUserId: string;
+  name: string;
   email: string;
-  password: string;
-  role: { type: string, enum: ['user', 'author'], default: 'user' };
-  firstName: string;
-  lastName: string;
-  profilePicture?: string;
+  password?: string;
+  profileImage?: string;
+  phoneNumber?: string;
+  role: { type: string, enum: ['user', 'admin'], default: 'user' };
   isDeleted: boolean;
   isBanned: boolean;
   createdAt: Date;
