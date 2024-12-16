@@ -21,7 +21,7 @@ router.post(
   UserControllers.createUser,
 );
 
-router.get(
+router.get( // for admin only
   '/',
   auth(USER_ROLE.admin),
   UserControllers.getAllUser,
@@ -29,14 +29,14 @@ router.get(
 
 router.get(
   '/me',
-  auth(USER_ROLE.admin, USER_ROLE.user, USER_ROLE.author),
+  auth(USER_ROLE.admin, USER_ROLE.user),
   UserControllers.getMe,
 );
 
 router.patch(
   '/update-me',
   validateRequest(UserValidation.updateUserValidationSchema),
-  auth(USER_ROLE.admin, USER_ROLE.user, USER_ROLE.author),
+  auth(USER_ROLE.admin, USER_ROLE.user),
   UserControllers.updateUser,
 );
 
