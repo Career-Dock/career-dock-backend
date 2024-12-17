@@ -9,60 +9,60 @@ import catchAsync from '../utils/catchAsync';
 
 export interface CustomRequest extends Request {
   user?: JwtPayload & { role: string };
+  auth?: { userId: string };
 }
 
 const auth = (...requiredRoles: TUserRole[]) => {
-  return catchAsync(async (req: CustomRequest, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
-    // checking if the token is missing
-    if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
-    }
+  return catchAsync(
+    async (req: CustomRequest, res: Response, next: NextFunction) => {
+      const token = req.headers.authorization;
+      // checking if the token is missing
+      if (!token) {
+        throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
+      }
 
-    // checking if the given token is valid
-    let decoded;
-    try {
-      decoded = jwt.verify(
-        token,
-        config.jwt_access_secret as string,
-      ) as JwtPayload;
-    } catch (error) {
-      // console.log(error);
-      throw new AppError(httpStatus.UNAUTHORIZED, 'Token invalid!');
-    }
+      // checking if the given token is valid
+      let decoded;
+      try {
+        decoded = jwt.verify(
+          token,
+          config.jwt_access_secret as string,
+        ) as JwtPayload;
+      } catch (error) {
+        // console.log(error);
+        throw new AppError(httpStatus.UNAUTHORIZED, 'Token invalid!');
+      }
 
-    const { role, email } = decoded;
+      const { role, email } = decoded;
 
-    // checking if the user is exist
-    const user = await User.isUserExists({ email });
+      // checking if the user is exist
+      const user = await User.isUserExists({ email });
 
-    if (!user) {
-      throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
-    }
-    // checking if the user is already deleted
-    const isDeleted = user?.isDeleted;
+      if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
+      }
+      // checking if the user is already deleted
+      const isDeleted = user?.isDeleted;
 
-    if (isDeleted) {
-      throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
-    }
+      if (isDeleted) {
+        throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
+      }
 
-    // checking if the user is Banned
-    const isBanned = user?.isBanned;
+      // checking if the user is Banned
+      const isBanned = user?.isBanned;
 
-    if (isBanned) {
-      throw new AppError(httpStatus.FORBIDDEN, 'This user is banned ! !');
-    }
+      if (isBanned) {
+        throw new AppError(httpStatus.FORBIDDEN, 'This user is banned ! !');
+      }
 
-    if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(
-        httpStatus.UNAUTHORIZED,
-        'You are not authorized!',
-      );
-    }
+      if (requiredRoles && !requiredRoles.includes(role)) {
+        throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
+      }
 
-    req.user = decoded as JwtPayload & { role: string };
-    next();
-  });
+      req.user = decoded as JwtPayload & { role: string };
+      next();
+    },
+  );
 };
 
 export default auth;
