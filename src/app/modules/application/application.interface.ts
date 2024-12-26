@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 export type TInterviewDetails = {
   date: string;
@@ -12,6 +12,8 @@ export type TApplication = {
   applicationGroupId?: string | Types.ObjectId;
   jobTitle: string;
   jobRole: string;
+  appliedVia?: string;
+  country?: string;
   companyName?: string;
   companyEmail?: string;
   companyWebsite?: string;
