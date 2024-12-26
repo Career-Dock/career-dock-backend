@@ -13,6 +13,7 @@ const interviewDetailsSchema = z.object({
 const createApplicationSchema = z.object({
   body: z.object({
     clerkUserId: z.string().min(1, 'User ID is required'),
+    applicationGroupId: z.string().optional(),
     jobTitle: z.string().min(1, 'Job title is required'),
     jobRole: z.string().min(1, 'Job role is required'),
     companyName: z.string().min(1, 'Company name is required').optional(),

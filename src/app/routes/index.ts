@@ -15,7 +15,7 @@ const moduleRoutes = [
     route: ApplicationRoutes,
   },
   {
-    path: '/application-group',
+    path: '/application-groups',
     route: ApplicationGroupRoutes,
   },
 ];
