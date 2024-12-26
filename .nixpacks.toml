@@ -1,5 +1,8 @@
+[phases.setup]
+cmd = "nix-env -iA nixpkgs.nodejs nixpkgs.npm"
+
 [phases.build]
-cmd = "npm run build"
+cmd = "npm install && npm run build"
 
 [phases.start]
-cmd = "npm run start"
+cmd = "node dist/server.js"
