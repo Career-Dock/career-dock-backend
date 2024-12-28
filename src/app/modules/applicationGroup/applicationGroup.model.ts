@@ -5,7 +5,7 @@ const ApplicationGroupSchema = new Schema<TApplicationGroup>(
   {
     name: { type: String, required: true },
     description: { type: String },
-    clerkUserId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    clerkUserId: { type: String, required: true },
     image: { type: String },
   },
   {
