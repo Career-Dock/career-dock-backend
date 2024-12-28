@@ -1,10 +1,20 @@
+import httpStatus from 'http-status';
+import AppError from '../../errors/AppError';
 import { TApplicationGroup } from './applicationGroup.interface';
 import { ApplicationGroup } from './applicationGroup.model';
 // import AppError from '../../errors/AppError';
 // import httpStatus from 'http-status';
 
-const createApplicationGroupIntoDB = async (payload: Partial<TApplicationGroup>) => {
+const createApplicationGroupIntoDB = async (
+  payload: Partial<TApplicationGroup>,
+) => {
   const applicationData = { ...payload };
+  if (!applicationData.clerkUserId) {
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      'You are not authorized to create this application group',
+    );
+  }
   const application = await ApplicationGroup.create(applicationData);
   return application;
 };
