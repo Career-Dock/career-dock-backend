@@ -25,7 +25,7 @@ const getAllApplicationGroupFromDB = async (
   query: Record<string, unknown>,
 ) => {
   // Fetch application groups
-  const applicationGroups = await ApplicationGroup.find({ clerkUserId, ...query });
+  const applicationGroups = await ApplicationGroup.find({ clerkUserId, ...query }).sort({ createdAt: -1 });
 
   // Enhance each group with totalApplications and activeApplications counts
   const applicationGroupsWithCounts = await Promise.all(

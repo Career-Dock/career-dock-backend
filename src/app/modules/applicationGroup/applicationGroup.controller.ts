@@ -5,6 +5,7 @@ import { ApplicationGroupServices } from './applicationGroup.service';
 import { CustomRequest } from '../../middlewares/auth';
 
 const createApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
+  console.log({user: req.auth});
   const result = await ApplicationGroupServices.createApplicationGroupIntoDB({
     ...req.body,
     clerkUserId: req.auth?.userId as string,
@@ -63,25 +64,25 @@ const updateApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
   });
 });
 
-// const deleteApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
-//   const clerkUserId = req.auth?.userId;
-//   const result = await ApplicationGroupServices.deleteApplicationGroupFromDB(
-//     clerkUserId!,
-//     req.params.id,
-//   );
+const deleteApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
+  const clerkUserId = req.auth?.userId;
+  const result = await ApplicationGroupServices.deleteApplicationGroupFromDB(
+    clerkUserId!,
+    req.params.id,
+  );
 
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'ApplicationGroup deleted successfully!',
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'ApplicationGroup deleted successfully!',
+    data: result,
+  });
+});
 
 export const ApplicationGroupControllers = {
   createApplicationGroup,
   getAllApplicationGroup,
   // getSingleApplicationGroup,
   updateApplicationGroup,
-  // deleteApplicationGroup,
+  deleteApplicationGroup,
 };

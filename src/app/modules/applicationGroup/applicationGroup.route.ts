@@ -36,10 +36,10 @@ router.patch(
   ApplicationGroupControllers.updateApplicationGroup,
 );
 
-// router.delete(
-//   '/:id',
-//   clerkMiddleware(),
-//   ApplicationGroupControllers.deleteApplicationGroup,
-// );
+router.delete(
+  '/:id',
+  clerkMiddleware(),
+  ApplicationGroupControllers.deleteApplicationGroup,
+);
 
 export const ApplicationGroupRoutes = router;
