@@ -29,12 +29,12 @@ router.get('/', clerkMiddleware(), ApplicationGroupControllers.getAllApplication
 //   ApplicationGroupControllers.getSingleApplicationGroup,
 // );
 
-// router.patch(
-//   '/:id',
-//   clerkMiddleware(),
-//   validateRequest(ApplicationGroupValidation.updateApplicationGroupSchema),
-//   ApplicationGroupControllers.updateApplicationGroup,
-// );
+router.patch(
+  '/:id',
+  clerkMiddleware(),
+  validateRequest(ApplicationGroupValidation.updateApplicationGroupSchema),
+  ApplicationGroupControllers.updateApplicationGroup,
+);
 
 // router.delete(
 //   '/:id',

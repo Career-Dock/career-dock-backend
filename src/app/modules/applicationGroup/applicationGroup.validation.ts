@@ -9,9 +9,9 @@ const createApplicationGroupSchema = z.object({
   }),
 });
 
-const updateApplicationSchema = createApplicationGroupSchema.partial();
+const updateApplicationGroupSchema = createApplicationGroupSchema.partial();
 
 export const ApplicationGroupValidation = {
   createApplicationGroupSchema,
-  updateApplicationSchema,
+  updateApplicationGroupSchema,
 };

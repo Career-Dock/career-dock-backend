@@ -47,21 +47,21 @@ const getAllApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
 //   });
 // });
 
-// const updateApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
-//   const clerkUserId = req.auth?.userId;
-//   const result = await ApplicationGroupServices.updateApplicationGroupInDB(
-//     clerkUserId!,
-//     req.params.id,
-//     req.body,
-//   );
+const updateApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
+  const clerkUserId = req.auth?.userId;
+  const result = await ApplicationGroupServices.updateApplicationGroupInDB(
+    clerkUserId!,
+    req.params.id,
+    req.body,
+  );
 
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'ApplicationGroup updated successfully!',
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'ApplicationGroup updated successfully!',
+    data: result,
+  });
+});
 
 // const deleteApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
 //   const clerkUserId = req.auth?.userId;
@@ -82,6 +82,6 @@ export const ApplicationGroupControllers = {
   createApplicationGroup,
   getAllApplicationGroup,
   // getSingleApplicationGroup,
-  // updateApplicationGroup,
+  updateApplicationGroup,
   // deleteApplicationGroup,
 };
