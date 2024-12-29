@@ -21,7 +21,7 @@ router.post(
   ApplicationGroupControllers.createApplicationGroup,
 );
 
-// router.get('/', clerkMiddleware(), ApplicationGroupControllers.getAllApplicationGroup);
+router.get('/', clerkMiddleware(), ApplicationGroupControllers.getAllApplicationGroup);
 
 // router.get(
 //   '/:id',

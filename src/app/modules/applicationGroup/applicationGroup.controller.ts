@@ -17,20 +17,20 @@ const createApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
   });
 });
 
-// const getAllApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
-//   const clerkUserId = req.auth?.userId;
-//   const result = await ApplicationGroupServices.getAllApplicationGroupFromDB(
-//     clerkUserId!,
-//     req.query,
-//   );
+const getAllApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
+  const clerkUserId = req.auth?.userId;
+  const result = await ApplicationGroupServices.getAllApplicationGroupFromDB(
+    clerkUserId!,
+    req.query,
+  );
 
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'All users retrieved successfully!',
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'All application board retrieved successfully!',
+    data: result,
+  });
+});
 
 // const getSingleApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
 //   const clerkUserId = req.auth?.userId;
@@ -80,7 +80,7 @@ const createApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
 
 export const ApplicationGroupControllers = {
   createApplicationGroup,
-  // getAllApplicationGroup,
+  getAllApplicationGroup,
   // getSingleApplicationGroup,
   // updateApplicationGroup,
   // deleteApplicationGroup,

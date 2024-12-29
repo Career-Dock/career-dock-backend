@@ -19,13 +19,13 @@ const createApplicationGroupIntoDB = async (
   return application;
 };
 
-// const getAllApplicationGroupFromDB = async (
-//   clerkUserId: string,
-//   query: Record<string, unknown>,
-// ) => {
-//   const result = await ApplicationGroup.find({ clerkUserId, ...query });
-//   return result;
-// };
+const getAllApplicationGroupFromDB = async (
+  clerkUserId: string,
+  query: Record<string, unknown>,
+) => {
+  const result = await ApplicationGroup.find({ clerkUserId, ...query });
+  return result;
+};
 
 // const getSingleApplicationGroupFromDB = async (clerkUserId: string, id: string) => {
 //   const result = await ApplicationGroup.findById(id);
@@ -81,7 +81,7 @@ const createApplicationGroupIntoDB = async (
 
 export const ApplicationGroupServices = {
   createApplicationGroupIntoDB,
-  // getAllApplicationGroupFromDB,
+  getAllApplicationGroupFromDB,
   // getSingleApplicationGroupFromDB,
   // updateApplicationGroupInDB,
   // deleteApplicationGroupFromDB,
