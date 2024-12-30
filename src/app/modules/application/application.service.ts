@@ -3,8 +3,8 @@ import { Application } from './application.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 
-const createApplicationIntoDB = async (payload: Partial<TApplication>) => {
-  const applicationData = { ...payload };
+const createApplicationIntoDB = async (payload: Partial<TApplication>, clerkUserId: string) => {
+  const applicationData = { ...payload, clerkUserId };
   const application = await Application.create(applicationData);
   return application;
 };

@@ -5,11 +5,11 @@ import { ApplicationServices } from './application.service';
 import { CustomRequest } from '../../middlewares/auth';
 
 const createApplication = catchAsync(async (req: CustomRequest, res) => {
-  const result = await ApplicationServices.createApplicationIntoDB(req.body);
+  const result = await ApplicationServices.createApplicationIntoDB(req.body, req.auth?.userId as string);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Application registered successfully!',
+    message: 'Application created successfully!',
     data: result,
   });
 });
@@ -24,7 +24,7 @@ const getAllApplication = catchAsync(async (req: CustomRequest, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'All users retrieved successfully!',
+    message: 'All applications retrieved successfully!',
     data: result,
   });
 });

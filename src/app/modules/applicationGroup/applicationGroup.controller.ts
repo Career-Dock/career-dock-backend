@@ -5,7 +5,6 @@ import { ApplicationGroupServices } from './applicationGroup.service';
 import { CustomRequest } from '../../middlewares/auth';
 
 const createApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
-  console.log({user: req.auth});
   const result = await ApplicationGroupServices.createApplicationGroupIntoDB({
     ...req.body,
     clerkUserId: req.auth?.userId as string,
