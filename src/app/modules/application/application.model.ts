@@ -9,8 +9,8 @@ const InterviewDetailsSchema: Schema<TInterviewDetails> = new Schema({
 
 const ApplicationSchema = new Schema<TApplication>(
   {
-    clerkUserId: { type: String, required: true },
-    applicationGroupId: { type: String },
+    clerkUserId: { type: String, required: false },
+    applicationGroupId: { type: String, required: true },
     jobTitle: { type: String, required: true },
     jobRole: { type: String, required: true },
     companyName: { type: String },
