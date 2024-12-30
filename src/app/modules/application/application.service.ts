@@ -2,6 +2,7 @@ import { TApplication } from './application.interface';
 import { Application } from './application.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const createApplicationIntoDB = async (payload: Partial<TApplication>, clerkUserId: string) => {
   const applicationData = { ...payload, clerkUserId };
@@ -13,8 +14,18 @@ const getAllApplicationFromDB = async (
   clerkUserId: string,
   query: Record<string, unknown>,
 ) => {
-  const result = await Application.find({ clerkUserId, ...query });
-  return result;
+  const initialQuery = Application.find({ clerkUserId });
+
+  // Apply QueryBuilder to refine the query
+  const queryBuilder = new QueryBuilder(initialQuery, query)
+    .search(['jobTitle', 'companyName', 'jobRole']) // Searching specific fields
+    .filter() // Filters on jobType, status, or any other field passed in the query
+    .sort() // Sorting results based on sort query parameter or default
+    .paginate() // Pagination logic for page and limit
+    .fields(); // Select specific fields to include or exclude in the response
+
+  const applications = await queryBuilder.modelQuery;
+  return applications;
 };
 
 const getSingleApplicationFromDB = async (clerkUserId: string, id: string) => {
