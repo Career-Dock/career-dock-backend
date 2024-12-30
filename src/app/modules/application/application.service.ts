@@ -25,7 +25,7 @@ const getAllApplicationFromDB = async (
     .fields(); // Select specific fields to include or exclude in the response
 
   const applications = await queryBuilder.modelQuery;
-  return applications;
+  return { applications, count: applications?.length };
 };
 
 const getSingleApplicationFromDB = async (clerkUserId: string, id: string) => {
