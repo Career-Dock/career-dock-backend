@@ -25,16 +25,23 @@ class QueryBuilder<T> {
         return this;
     }
 
-    filter() {
-        const queryObj = { ...this.query }; // copy
+    filter(multiValueFields: string[] | null) {
+        const queryObj = { ...this.query }; // Copy the query object
 
         // Filtering
         const excludeFields = ['searchTerm', 'sort', 'limit', 'page', 'fields'];
-
         excludeFields.forEach((el) => delete queryObj[el]);
+        // Dynamically handle multi-value fields
+        if (multiValueFields) {
+            multiValueFields.forEach((field) => {
+                if (queryObj[field]) {
+                    const values = (queryObj[field] as string).split('.').map((value) => value.trim());
+                    queryObj[field] = { $in: values };
+                }
+            });
+        }
 
         this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
-
         return this;
     }
 

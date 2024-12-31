@@ -28,7 +28,7 @@ const ApplicationSchema = new Schema<TApplication>(
     },
     status: {
       type: String,
-      enum: ['Applied', 'Interview Scheduled', 'Rejected', 'Under Review'],
+      enum: ['Applied', 'Interview_Scheduled', 'Rejected', 'Under_Review', 'Task_Received', 'Task_Ongoing', 'Task_Submitted', 'Offer_Received', 'Offer_Accepted'],
       required: true,
     },
     appliedDate: { type: Date, default: new Date() },
