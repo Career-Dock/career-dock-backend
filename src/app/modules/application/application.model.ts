@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { TApplication, TInterviewDetails } from './application.interface';
 
 const InterviewDetailsSchema: Schema<TInterviewDetails> = new Schema({
-  date: { type: String, required: true },
+  date: { type: String },
   time: { type: String },
   location: { type: String },
 });
