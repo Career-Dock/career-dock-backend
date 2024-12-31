@@ -19,7 +19,7 @@ const getAllApplicationFromDB = async (
   // Apply QueryBuilder to refine the query
   const queryBuilder = new QueryBuilder(initialQuery, query)
     .search(['jobTitle', 'companyName', 'jobRole']) // Searching specific fields
-    .filter() // Filters on jobType, status, or any other field passed in the query
+    .filter(['jobType', 'status']) // Filters on jobType, status, or any other field passed in the query
     .sort() // Sorting results based on sort query parameter or default
     .paginate() // Pagination logic for page and limit
     .fields(); // Select specific fields to include or exclude in the response

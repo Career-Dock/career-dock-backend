@@ -25,12 +25,7 @@ const createApplicationSchema = z.object({
     jobPortal: z.string().min(1, 'Job portal is required').optional(),
     address: z.string().min(1, 'Address is required').optional(),
     jobType: z.enum(['remote', 'onsite', 'hybrid']),
-    status: z.enum([
-      'Applied',
-      'Interview Scheduled',
-      'Rejected',
-      'Under Review',
-    ]),
+    status: z.enum(['Applied', 'Interview_Scheduled', 'Rejected', 'Under_Review', 'Task_Received', 'Task_Ongoing', 'Task_Submitted', 'Offer_Received', 'Offer_Accepted'],),
     appliedDate: z
       .string()
       .refine((val) => !isNaN(Date.parse(val)), 'Invalid date format')

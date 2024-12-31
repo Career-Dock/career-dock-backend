@@ -23,9 +23,14 @@ export type TApplication = {
   jobType: 'remote' | 'onsite' | 'hybrid';
   status:
     | 'Applied'
-    | 'Interview Scheduled'
     | 'Rejected'
-    | 'Under Review'
+    | 'Under_Review'
+    | 'Task_Received'
+    | 'Task_Ongoing'
+    | 'Task_Submitted'
+    | 'Interview_Scheduled'
+    | 'Offer_Received'
+    | 'Offer_Accepted'
     | string;
   appliedDate?: Date;
   interviewDetails?: TInterviewDetails;
