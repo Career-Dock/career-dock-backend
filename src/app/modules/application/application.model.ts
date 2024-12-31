@@ -2,9 +2,9 @@ import { model, Schema } from 'mongoose';
 import { TApplication, TInterviewDetails } from './application.interface';
 
 const InterviewDetailsSchema: Schema<TInterviewDetails> = new Schema({
-  date: { type: String, required: true },
-  time: { type: String, required: true },
-  location: { type: String, required: true },
+  date: { type: String, required: false },
+  time: { type: String, required: false },
+  location: { type: String, required: false },
 });
 
 const ApplicationSchema = new Schema<TApplication>(
@@ -12,9 +12,8 @@ const ApplicationSchema = new Schema<TApplication>(
     clerkUserId: { type: String, required: false },
     applicationGroupId: { type: String, required: true },
     jobTitle: { type: String, required: true },
-    jobRole: { type: String, required: true },
-    companyName: { type: String },
-    country: { type: String },
+    companyName: { type: String, required: true },
+    country: { type: String, required: true },
     appliedVia: { type: String },
     companyEmail: { type: String },
     companyWebsite: { type: String },
