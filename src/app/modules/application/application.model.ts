@@ -3,8 +3,8 @@ import { TApplication, TInterviewDetails } from './application.interface';
 
 const InterviewDetailsSchema: Schema<TInterviewDetails> = new Schema({
   date: { type: String, required: true },
-  time: { type: String, required: true },
-  location: { type: String, required: true },
+  time: { type: String },
+  location: { type: String },
 });
 
 const ApplicationSchema = new Schema<TApplication>(

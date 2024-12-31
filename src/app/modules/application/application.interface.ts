@@ -1,9 +1,9 @@
 import { Types } from 'mongoose';
 
 export type TInterviewDetails = {
-  date: string;
-  time: string;
-  location: string;
+  date?: string;
+  time?: string;
+  location?: string;
 };
 
 export type TApplication = {

@@ -3,11 +3,11 @@ import { z } from 'zod';
 const interviewDetailsSchema = z.object({
   date: z
     .string()
-    .refine((val) => !isNaN(Date.parse(val)), 'Invalid date format'),
+    .refine((val) => !isNaN(Date.parse(val)), 'Invalid date format').optional(),
   time: z
     .string()
-    .regex(/^\d{2}:\d{2}$/, 'Invalid time format (HH:MM expected)'),
-  location: z.string().min(1, 'Location is required'),
+    .regex(/^\d{2}:\d{2}$/, 'Invalid time format (HH:MM expected)').optional(),
+  location: z.string().min(1, 'Location is required').optional(),
 });
 
 const createApplicationSchema = z.object({
