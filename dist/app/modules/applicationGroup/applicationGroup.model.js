@@ -5,7 +5,8 @@ const mongoose_1 = require("mongoose");
 const ApplicationGroupSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
     description: { type: String },
-    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true }
+    clerkUserId: { type: String, required: true },
+    image: { type: String },
 }, {
     timestamps: true,
 });

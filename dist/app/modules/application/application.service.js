@@ -16,14 +16,23 @@ exports.ApplicationServices = void 0;
 const application_model_1 = require("./application.model");
 const AppError_1 = __importDefault(require("../../errors/AppError"));
 const http_status_1 = __importDefault(require("http-status"));
-const createApplicationIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const applicationData = Object.assign({}, payload);
+const QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
+const createApplicationIntoDB = (payload, clerkUserId) => __awaiter(void 0, void 0, void 0, function* () {
+    const applicationData = Object.assign(Object.assign({}, payload), { clerkUserId });
     const application = yield application_model_1.Application.create(applicationData);
     return application;
 });
 const getAllApplicationFromDB = (clerkUserId, query) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield application_model_1.Application.find(Object.assign({ clerkUserId }, query));
-    return result;
+    const initialQuery = application_model_1.Application.find({ clerkUserId });
+    // Apply QueryBuilder to refine the query
+    const queryBuilder = new QueryBuilder_1.default(initialQuery, query)
+        .search(['jobTitle', 'companyName', 'jobRole', 'country']) // Searching specific fields
+        .filter(['jobType', 'status']) // Filters on jobType, status, or any other field passed in the query
+        .sort() // Sorting results based on sort query parameter or default
+        .paginate() // Pagination logic for page and limit
+        .fields(); // Select specific fields to include or exclude in the response
+    const applications = yield queryBuilder.modelQuery;
+    return { applications, count: applications === null || applications === void 0 ? void 0 : applications.length };
 });
 const getSingleApplicationFromDB = (clerkUserId, id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield application_model_1.Application.findById(id);

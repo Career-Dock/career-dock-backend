@@ -5,18 +5,18 @@ const zod_1 = require("zod");
 const interviewDetailsSchema = zod_1.z.object({
     date: zod_1.z
         .string()
-        .refine((val) => !isNaN(Date.parse(val)), 'Invalid date format'),
+        .refine((val) => !isNaN(Date.parse(val)), 'Invalid date format')
+        .optional(),
     time: zod_1.z
         .string()
-        .regex(/^\d{2}:\d{2}$/, 'Invalid time format (HH:MM expected)'),
-    location: zod_1.z.string().min(1, 'Location is required'),
+        .regex(/^\d{2}:\d{2}$/, 'Invalid time format (HH:MM expected)')
+        .optional(),
+    location: zod_1.z.string().min(1, 'Location is required').optional(),
 });
 const createApplicationSchema = zod_1.z.object({
     body: zod_1.z.object({
-        clerkUserId: zod_1.z.string().min(1, 'User ID is required'),
-        applicationGroupId: zod_1.z.string().optional(),
+        applicationGroupId: zod_1.z.string(),
         jobTitle: zod_1.z.string().min(1, 'Job title is required'),
-        jobRole: zod_1.z.string().min(1, 'Job role is required'),
         companyName: zod_1.z.string().min(1, 'Company name is required').optional(),
         companyEmail: zod_1.z.string().email('Invalid email address').optional(),
         companyWebsite: zod_1.z.string().min(1, 'Phone number is required').optional(),
@@ -29,9 +29,14 @@ const createApplicationSchema = zod_1.z.object({
         jobType: zod_1.z.enum(['remote', 'onsite', 'hybrid']),
         status: zod_1.z.enum([
             'Applied',
-            'Interview Scheduled',
+            'Interview_Scheduled',
             'Rejected',
-            'Under Review',
+            'Under_Review',
+            'Task_Received',
+            'Task_Ongoing',
+            'Task_Submitted',
+            'Offer_Received',
+            'Offer_Accepted',
         ]),
         appliedDate: zod_1.z
             .string()

@@ -18,11 +18,12 @@ const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const http_status_1 = __importDefault(require("http-status"));
 const application_service_1 = require("./application.service");
 const createApplication = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield application_service_1.ApplicationServices.createApplicationIntoDB(req.body);
+    var _a;
+    const result = yield application_service_1.ApplicationServices.createApplicationIntoDB(req.body, (_a = req.auth) === null || _a === void 0 ? void 0 : _a.userId);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Application registered successfully!',
+        message: 'Application created successfully!',
         data: result,
     });
 }));
@@ -33,7 +34,7 @@ const getAllApplication = (0, catchAsync_1.default)((req, res) => __awaiter(void
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'All users retrieved successfully!',
+        message: 'All applications retrieved successfully!',
         data: result,
     });
 }));

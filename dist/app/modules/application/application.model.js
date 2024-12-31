@@ -3,17 +3,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Application = void 0;
 const mongoose_1 = require("mongoose");
 const InterviewDetailsSchema = new mongoose_1.Schema({
-    date: { type: String, required: true },
-    time: { type: String, required: true },
-    location: { type: String, required: true },
+    date: { type: String },
+    time: { type: String },
+    location: { type: String },
 });
 const ApplicationSchema = new mongoose_1.Schema({
-    clerkUserId: { type: String, required: true },
-    applicationGroupId: { type: String },
+    clerkUserId: { type: String, required: false },
+    applicationGroupId: { type: String, required: true },
     jobTitle: { type: String, required: true },
-    jobRole: { type: String, required: true },
-    companyName: { type: String },
-    country: { type: String },
+    companyName: { type: String, required: true },
+    country: { type: String, required: true },
     appliedVia: { type: String },
     companyEmail: { type: String },
     companyWebsite: { type: String },
@@ -27,11 +26,21 @@ const ApplicationSchema = new mongoose_1.Schema({
     },
     status: {
         type: String,
-        enum: ['Applied', 'Interview Scheduled', 'Rejected', 'Under Review'],
+        enum: [
+            'Applied',
+            'Interview_Scheduled',
+            'Rejected',
+            'Under_Review',
+            'Task_Received',
+            'Task_Ongoing',
+            'Task_Submitted',
+            'Offer_Received',
+            'Offer_Accepted',
+        ],
         required: true,
     },
     appliedDate: { type: Date, default: new Date() },
-    interviewDetails: { type: InterviewDetailsSchema },
+    interviewDetails: { type: InterviewDetailsSchema, required: false },
     notes: { type: String },
     jobPostingURL: { type: String },
     resumeURL: { type: String },

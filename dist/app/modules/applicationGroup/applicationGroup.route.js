@@ -18,21 +18,12 @@ const router = express_1.default.Router();
  * 5. Delete a user ---> DELETE /users/:id
  */
 router.post('/', (0, express_2.clerkMiddleware)(), (0, validateRequest_1.default)(applicationGroup_validation_1.ApplicationGroupValidation.createApplicationGroupSchema), applicationGroup_controller_1.ApplicationGroupControllers.createApplicationGroup);
-// router.get('/', clerkMiddleware(), ApplicationGroupControllers.getAllApplicationGroup);
+router.get('/', (0, express_2.clerkMiddleware)(), applicationGroup_controller_1.ApplicationGroupControllers.getAllApplicationGroup);
 // router.get(
 //   '/:id',
 //   clerkMiddleware(),
 //   ApplicationGroupControllers.getSingleApplicationGroup,
 // );
-// router.patch(
-//   '/:id',
-//   clerkMiddleware(),
-//   validateRequest(ApplicationGroupValidation.updateApplicationGroupSchema),
-//   ApplicationGroupControllers.updateApplicationGroup,
-// );
-// router.delete(
-//   '/:id',
-//   clerkMiddleware(),
-//   ApplicationGroupControllers.deleteApplicationGroup,
-// );
+router.patch('/:id', (0, express_2.clerkMiddleware)(), (0, validateRequest_1.default)(applicationGroup_validation_1.ApplicationGroupValidation.updateApplicationGroupSchema), applicationGroup_controller_1.ApplicationGroupControllers.updateApplicationGroup);
+router.delete('/:id', (0, express_2.clerkMiddleware)(), applicationGroup_controller_1.ApplicationGroupControllers.deleteApplicationGroup);
 exports.ApplicationGroupRoutes = router;
