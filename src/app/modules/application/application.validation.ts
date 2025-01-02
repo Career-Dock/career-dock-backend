@@ -49,9 +49,26 @@ const createApplicationSchema = z.object({
   }),
 });
 
+const changeApplicationStatusSchema = z.object({
+  body: z.object({
+    status: z.enum([
+      'Applied',
+      'Interview_Scheduled',
+      'Rejected',
+      'Under_Review',
+      'Task_Received',
+      'Task_Ongoing',
+      'Task_Submitted',
+      'Offer_Received',
+      'Offer_Accepted',
+    ]),
+  }),
+});
+
 const updateApplicationSchema = createApplicationSchema.partial();
 
 export const ApplicationValidation = {
   createApplicationSchema,
   updateApplicationSchema,
+  changeApplicationStatusSchema
 };

@@ -60,6 +60,22 @@ const updateApplication = catchAsync(async (req: CustomRequest, res) => {
   });
 });
 
+const changeApplicationStatus = catchAsync(async (req: CustomRequest, res) => {
+  const clerkUserId = req.auth?.userId;
+  const result = await ApplicationServices.changeApplicationStatusInDB(
+    clerkUserId!,
+    req.params.id,
+    req.body.status,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Application status updated successfully!',
+    data: result,
+  });
+});
+
 const deleteApplication = catchAsync(async (req: CustomRequest, res) => {
   const clerkUserId = req.auth?.userId;
   const result = await ApplicationServices.deleteApplicationFromDB(
@@ -81,4 +97,5 @@ export const ApplicationControllers = {
   getSingleApplication,
   updateApplication,
   deleteApplication,
+  changeApplicationStatus
 };

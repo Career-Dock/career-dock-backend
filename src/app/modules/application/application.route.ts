@@ -42,4 +42,11 @@ router.delete(
   ApplicationControllers.deleteApplication,
 );
 
+router.patch(
+  '/update-status/:id',
+  clerkMiddleware(),
+  validateRequest(ApplicationValidation.changeApplicationStatusSchema),
+  ApplicationControllers.changeApplicationStatus,
+);
+
 export const ApplicationRoutes = router;

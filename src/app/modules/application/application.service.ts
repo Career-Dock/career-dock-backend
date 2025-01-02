@@ -80,10 +80,45 @@ const deleteApplicationFromDB = async (clerkUserId: string, id: string) => {
   return result;
 };
 
+const changeApplicationStatusInDB = async (
+  clerkUserId: string,
+  id: string,
+  status: {
+    status:
+    | 'Applied'
+    | 'Rejected'
+    | 'Under_Review'
+    | 'Task_Received'
+    | 'Task_Ongoing'
+    | 'Task_Submitted'
+    | 'Interview_Scheduled'
+    | 'Offer_Received'
+    | 'Offer_Accepted'
+  },
+) => {
+  const application = await Application.findById(id);
+  if (!application) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Application not found');
+  }
+  if (application.clerkUserId !== clerkUserId) {
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      'You are not authorized to update this application',
+    );
+  }
+  const result = await Application.findByIdAndUpdate(
+    id,
+    { status },
+    { new: true },
+  );
+  return result;
+};
+
 export const ApplicationServices = {
   createApplicationIntoDB,
   getAllApplicationFromDB,
   getSingleApplicationFromDB,
   updateApplicationInDB,
   deleteApplicationFromDB,
+  changeApplicationStatusInDB
 };
