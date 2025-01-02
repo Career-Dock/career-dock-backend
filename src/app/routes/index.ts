@@ -3,6 +3,7 @@ import { UserRoutes } from '../modules/user/user.route';
 import { ApplicationRoutes } from '../modules/application/application.route';
 import { ApplicationGroupRoutes } from '../modules/applicationGroup/applicationGroup.route';
 import { SeedRoutes } from '../modules/seed/seed.routes';
+import { ApplicationShareRoutes } from '../modules/applicationShare/applicationShare.route';
 
 const router = Router();
 
@@ -22,6 +23,10 @@ const moduleRoutes = [
   {
     path: '/application-groups',
     route: ApplicationGroupRoutes,
+  },
+  {
+    path: '/application-shares',
+    route: ApplicationShareRoutes,
   },
 ];
 
