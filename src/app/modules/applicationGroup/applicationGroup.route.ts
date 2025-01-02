@@ -7,11 +7,11 @@ import { clerkMiddleware } from '@clerk/express';
 const router = express.Router();
 
 /**
- * 1. Add a User ---> POST /users;
- * 2. Get all users of a company ---> GET /users;
- * 3. Get self profile ---> GET /users/me
- * 4. Update self profile ---> PATCH /users/update-me
- * 5. Delete a user ---> DELETE /users/:id
+ * 1. Add a User ---> POST /application-groups;
+ * 2. Get all application groups of a user ---> GET /application-groups;
+ * 3. Get single application group ---> GET /application-groups/:id
+ * 4. Update single application group ---> PATCH /application-groups/update-me
+ * 5. Delete an application group ---> DELETE /application-groups/:id
  */
 
 router.post(
@@ -23,11 +23,11 @@ router.post(
 
 router.get('/', clerkMiddleware(), ApplicationGroupControllers.getAllApplicationGroup);
 
-// router.get(
-//   '/:id',
-//   clerkMiddleware(),
-//   ApplicationGroupControllers.getSingleApplicationGroup,
-// );
+router.get(
+  '/:id',
+  clerkMiddleware(),
+  ApplicationGroupControllers.getSingleApplicationGroup,
+);
 
 router.patch(
   '/:id',

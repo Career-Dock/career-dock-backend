@@ -16,6 +16,7 @@ const createApplicationSchema = z.object({
   body: z.object({
     applicationGroupId: z.string(),
     jobTitle: z.string().min(1, 'Job title is required'),
+    jobDescription: z.string().optional(),
     companyName: z.string().min(1, 'Company name is required').optional(),
     companyEmail: z.string().email('Invalid email address').optional(),
     companyWebsite: z.string().min(1, 'Phone number is required').optional(),

@@ -140,19 +140,19 @@ const getAllApplicationGroupFromDB = async (
   return {applicationGroups, allApplicationsCount: allApplications?.length, allActiveApplicationsCount: allActiveApplications?.length};
 };
 
-// const getSingleApplicationGroupFromDB = async (clerkUserId: string, id: string) => {
-//   const result = await ApplicationGroup.findById(id);
-//   if (!result) {
-//     throw new AppError(httpStatus.NOT_FOUND, 'ApplicationGroup not found');
-//   }
-//   if (result.userId !== clerkUserId) {
-//     throw new AppError(
-//       httpStatus.UNAUTHORIZED,
-//       'You are not authorized to access this application',
-//     );
-//   }
-//   return result;
-// };
+const getSingleApplicationGroupFromDB = async (clerkUserId: string, id: string) => {
+  const result = await ApplicationGroup.findById(id);
+  if (!result) {
+    throw new AppError(httpStatus.NOT_FOUND, 'ApplicationGroup not found');
+  }
+  if (result.clerkUserId !== clerkUserId) {
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      'You are not authorized to access this application board',
+    );
+  }
+  return result;
+};
 
 const updateApplicationGroupInDB = async (
   clerkUserId: string,
@@ -195,7 +195,7 @@ const deleteApplicationGroupFromDB = async (clerkUserId: string, id: string) => 
 export const ApplicationGroupServices = {
   createApplicationGroupIntoDB,
   getAllApplicationGroupFromDB,
-  // getSingleApplicationGroupFromDB,
+  getSingleApplicationGroupFromDB,
   updateApplicationGroupInDB,
   deleteApplicationGroupFromDB,
 };

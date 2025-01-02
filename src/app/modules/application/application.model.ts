@@ -12,6 +12,7 @@ const ApplicationSchema = new Schema<TApplication>(
     clerkUserId: { type: String, required: false },
     applicationGroupId: { type: String, required: true },
     jobTitle: { type: String, required: true },
+    jobDescription: { type: String },
     companyName: { type: String, required: true },
     country: { type: String, required: true },
     appliedVia: { type: String },

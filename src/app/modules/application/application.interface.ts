@@ -11,7 +11,7 @@ export type TApplication = {
   clerkUserId: string;
   applicationGroupId?: string | Types.ObjectId;
   jobTitle: string;
-  jobRole: string;
+  jobDescription?: string;
   appliedVia?: string;
   country?: string;
   companyName?: string;

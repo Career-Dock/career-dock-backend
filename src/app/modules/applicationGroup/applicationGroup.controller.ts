@@ -32,20 +32,20 @@ const getAllApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
   });
 });
 
-// const getSingleApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
-//   const clerkUserId = req.auth?.userId;
-//   const result = await ApplicationGroupServices.getSingleApplicationGroupFromDB(
-//     clerkUserId!,
-//     req.params.id,
-//   );
+const getSingleApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
+  const clerkUserId = req.auth?.userId;
+  const result = await ApplicationGroupServices.getSingleApplicationGroupFromDB(
+    clerkUserId!,
+    req.params.id,
+  );
 
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Your data retrieved successfully!',
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Application group retrieved successfully!',
+    data: result,
+  });
+});
 
 const updateApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
   const clerkUserId = req.auth?.userId;
@@ -81,7 +81,7 @@ const deleteApplicationGroup = catchAsync(async (req: CustomRequest, res) => {
 export const ApplicationGroupControllers = {
   createApplicationGroup,
   getAllApplicationGroup,
-  // getSingleApplicationGroup,
+  getSingleApplicationGroup,
   updateApplicationGroup,
   deleteApplicationGroup,
 };
