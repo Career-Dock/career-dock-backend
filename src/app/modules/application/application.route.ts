@@ -7,11 +7,12 @@ import { clerkMiddleware } from '@clerk/express';
 const router = express.Router();
 
 /**
- * 1. Add a User ---> POST /users;
- * 2. Get all users of a company ---> GET /users;
- * 3. Get self profile ---> GET /users/me
- * 4. Update self profile ---> PATCH /users/update-me
- * 5. Delete a user ---> DELETE /users/:id
+ * 1. Add an application ---> POST /applications;
+ * 2. Get all applications of an user ---> GET /applications;
+ * 3. Get single application ---> GET /applications/:id
+ * 4. Update an application ---> PATCH /applications/:id
+ * 5. Delete an application ---> DELETE /applications/:id
+ * 6. Update application status ---> DELETE /applications/update-status/:id
  */
 
 router.post(

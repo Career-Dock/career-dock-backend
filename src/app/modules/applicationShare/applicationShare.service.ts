@@ -23,7 +23,7 @@ const createApplicationShareIntoDB = async (
 const getAllApplicationShareFromDB = async (
   clerkUserId: string,
 ) => {
-  const result = await ApplicationShare.findOne({ clerkUserId });
+  const result = await ApplicationShare.find({ clerkUserId });
   return result;
 };
 
