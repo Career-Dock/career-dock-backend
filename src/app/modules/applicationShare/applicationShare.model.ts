@@ -4,6 +4,7 @@ import { TApplicationShare } from "./applicationShare.interface";
 const ApplicationShareSchema = new Schema<TApplicationShare>(
   {
     clerkUserId: { type: String, required: true },
+    shareName: { type: String, required: true },
     applicationGroupName: { type: String, default: "All Applications" },
     query: {
       searchTerm: { type: String },

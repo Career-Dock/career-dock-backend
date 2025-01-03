@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 const createApplicationShareValidationSchema = z.object({
   body: z.object({
+    shareName: z.string(),
     applicationGroupName: z.string().optional(),
     query: z.object({
       searchTerm: z.string().optional(),
