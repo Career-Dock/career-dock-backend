@@ -1,6 +1,7 @@
 export type TApplicationShare = {
   _id: string;
   clerkUserId: string;
+  applicationGroupName?: string;
   query: {
     searchTerm?: string;
     limit?: number;

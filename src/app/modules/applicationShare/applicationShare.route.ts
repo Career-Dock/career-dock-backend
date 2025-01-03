@@ -7,7 +7,7 @@ import { clerkMiddleware } from '@clerk/express';
 const router = express.Router();
 
 /**
- * 1. Add a User ---> POST /application-shares;
+ * 1. Add a Application ---> POST /application-shares;
  * 2. Get all application shares of a user ---> GET /application-shares;
  * 2. Get all applications of a single share of a user ---> GET /application-shares;
  * 3. Get single application share ---> GET /application-shares/:id
